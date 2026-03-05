@@ -87,7 +87,11 @@ export const ImageCarousel: React.FC<Props> = memo(({ images, onScrollStart, onD
 
   const renderItem = useCallback(
     ({ item }: { item: string }) => (
-      <View style={styles.itemContainer}>
+      <View
+        style={styles.itemContainer}
+        renderToHardwareTextureAndroid
+        shouldRasterizeIOS
+      >
         <Image
           source={{ uri: item }}
           style={styles.image}
@@ -178,10 +182,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing.lg,
-
-    // Helps 3D transforms stay smooth on some Android devices
-    renderToHardwareTextureAndroid: true,
-    shouldRasterizeIOS: true,
   },
   image: {
     width: '100%',
